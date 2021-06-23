@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 import {CityButton} from "./components/CityButton"
 import {CityInfo} from "./components/CityInfo"
 import {useDispatch} from "react-redux"
-import {setPlaces} from "./actions/actions"
+import {setPlaces, fetchPlaces} from "./actions/actions"
 import {useSelector} from "react-redux"
 import {Loader} from "./components/Loader";
 
@@ -16,18 +16,23 @@ function App(store) {
 
     const places = useSelector(state => state.places)
 
+    const isLoading = useSelector(state => state.isLoading)
+
     const cityInfo = useSelector(state => state.city)
 
     const dispatch = useDispatch()
 
 
     useEffect( () => {
-            dispatch(setPlaces())
+            dispatch(setPlaces());
+            dispatch(fetchPlaces());
+            // console.log('apikey', process.env.REACT_APP_API_KEY)
+            // console.log('apiurl', process.env.REACT_APP_API_URL)
         }, []
     )
 
 
-    if (!places) {
+    if (isLoading || !places) {
         return (<div className="container text-center pt-5 mt-5">
             <Loader/>
         </div>)
