@@ -1,73 +1,60 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useEffect} from 'react'
+import {CityButton} from "./components/CityButton"
+import {CityInfo} from "./components/CityInfo"
+import {useDispatch} from "react-redux"
+import {setPlaces} from "./actions/actions"
+import {useSelector} from "react-redux"
+import {Loader} from "./components/Loader";
 
 // app dev CanISkii
 
-const PLACES = [
-  { name: "Bukovel", zip: "94303", temp: '22', wind: '2', date: '21.06.2021', rain: false },
-  { name: "Dragobrat", zip: "94088", temp: '19', wind: '4', date: '21.06.2021', rain: true  },
-  { name: "Slavskoe", zip: "95062", temp: '30', wind: '1', date: '21.06.2021', rain: false  }
-];
+
+function App(store) {
+
+  // const [places, setPlaces] = useEffect([], [])
+
+    const places = useSelector(state => state.places)
+
+    const cityInfo = useSelector(state => state.city)
+
+    const dispatch = useDispatch()
 
 
-// const [city, setCity] = useState([])
+    useEffect( () => {
+            dispatch(setPlaces())
+        }, []
+    )
 
 
-function CityInfo(city) {
-
-    const place = city.city
-
-  return (
-      <div className="bg-default w-100">
-        <p>You choosed skiing location {place.name}</p>
-        <p>Outside temp is {place.temp}</p>
-        <p>The wind is {place.wind} m/s</p>
-        <p>{place.rain ? 'Its rainy now. You shell not pass' : 'There is no rain, maybe time to ski'}</p>
-      </div>
-  )
-}
+    if (!places) {
+        return (<div className="container text-center pt-5 mt-5">
+            <Loader/>
+        </div>)
+    }
 
 
-function App() {
-  return (
-    <div className="App">
+    return (
+        <div className="App">
+          <div className="container pt-5 mt-4">
+              <div className="row">
+                  <div className="sidebar sidebar-nav col-3">
+                      <ul className="nav flex-column">
+                          {places.map((item) =>
+                              <li className="nav-item" key={item.zip}>
+                                  <CityButton city={item}/>
+                              </li>
+                          )}
+                      </ul>
+                  </div>
 
-      <div className="container">
-        nthng
-        .asd
-        <CityInfo city={PLACES[0]}></CityInfo>
-
-        {PLACES.map((place, index) => (
-            <button
-                key={index}
-                onClick={() => {
-                  console.log('Clicked index '+index);
-                }}
-            >
-              {place.name}
-            </button>
-        ))}
-
-        <button className="btn btn-primary">btn1</button>
-        <button className="btn btn-secondary">btn1</button>
-      </div>
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-    </div>
-  );
+                  <div className="col-9 main-content">
+                      <CityInfo city={cityInfo}/>
+                  </div>
+              </div>
+          </div>
+        </div>
+    )
 }
 
 export default App;
