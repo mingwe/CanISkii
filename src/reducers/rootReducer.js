@@ -1,4 +1,4 @@
-import {FETCH_PLACES, SETCITY, SETPLACES} from "../types/types"
+import {FETCH_PLACES, FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY, SETPLACES} from "../types/types"
 
 export const rootReducer = (state, action) => {
 
@@ -10,6 +10,8 @@ export const rootReducer = (state, action) => {
         case SETPLACES:
 
             const PLACES = [
+                { name: "Kiev"},
+                { name: "Moscow"},
                 { name: "Bukovel", zip: "94303", temp: '22', wind: '2', date: '21.06.2021', rain: false },
                 { name: "Dragobrat", zip: "94088", temp: '19', wind: '4', date: '21.06.2021', rain: true  },
                 { name: "Slavskoe", zip: "95062", temp: '30', wind: '1', date: '21.06.2021', rain: false  }
@@ -17,13 +19,13 @@ export const rootReducer = (state, action) => {
 
             return {...state, places: PLACES, isLoading: false}
 
-        case FETCH_PLACES:
-
-
-            const testCity = 'kiev'
-
-            const url = `http://api.openweathermap.org/data/2.5/weather?q=${testCity}&appid=${process.env.REACT_APP_API_KEY}`
-            console.log(url)
+        // case FETCH_PLACES:
+        //
+        //
+        //     const testCity = 'kiev'
+        //
+        //     const url = `http://api.openweathermap.org/data/2.5/weather?q=${testCity}&appid=${process.env.REACT_APP_API_KEY}`
+        //     console.log(url)
 
             // fetch(url)
             //     .then((response) => {
@@ -48,7 +50,20 @@ export const rootReducer = (state, action) => {
             // ]
 
             // return {...state, places: PLACES, isLoading: false}
+            // return state
+
+        case FETCH_PLACE_PENDING:
+            console.log('places pending:', action.payload)
             return state
+
+        case FETCH_PLACE_SUCCESS:
+
+            console.log('places success:', action.payload)
+            return {...state, fetchedPlace: action.payload, hasError: false}
+
+        case FETCH_PLACE_ERROR:
+            console.log('places error:', action.payload)
+            return {...state, hasError: true, errormessage: action.error}
 
         default:
             return state

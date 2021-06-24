@@ -1,22 +1,23 @@
-import React from "react";
-import {rootReducer} from "../reducers/rootReducer";
-import {setCity} from "../actions/actions";
+import React, {useEffect} from "react";
+import {setCity, setPlaces} from "../actions/actions";
 import {useDispatch} from 'react-redux'
-
+import {fetchPlace} from "../fetch/fetchPlaces";
 
 export const CityButton = (props) => {
 
+
+
     const dispatch = useDispatch()
 
-    const onclickHandler = (city) => (
-        dispatch(setCity(city))
-    )
+    const onclickHandler = (city) => {
+        dispatch(setCity(city));
+        dispatch(fetchPlace(city.name))
+    }
 
     // const cityName = props.name ? props.name : 'default city'
 
-    const city = props.city
 
-    console.log(city)
+    const city = props.city
 
     return (
         <button

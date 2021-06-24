@@ -5,16 +5,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import {rootReducer} from './reducers/rootReducer'
 
 
-// const enhancers = [applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()]
+const devtoolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const composed = compose(applyMiddleware(thunk), devtoolsEnhancer)
+
+const preloadedState = {
+    places: [],
+    fetchedPlace: {},
+    city: {},
+    isLoading: true
+}
 
 
-const store = createStore(rootReducer, {places: [], city: {}, isLoading: true},window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(rootReducer, preloadedState, composed)
 
 ReactDOM.render(
   <React.StrictMode>

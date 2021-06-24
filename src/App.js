@@ -3,7 +3,8 @@ import React, {useEffect} from 'react'
 import {CityButton} from "./components/CityButton"
 import {CityInfo} from "./components/CityInfo"
 import {useDispatch} from "react-redux"
-import {setPlaces, fetchPlaces} from "./actions/actions"
+import {setPlaces} from "./actions/actions"
+// import {fetchPlace} from "./fetch/fetchPlaces";
 import {useSelector} from "react-redux"
 import {Loader} from "./components/Loader";
 
@@ -20,14 +21,14 @@ function App(store) {
 
     const cityInfo = useSelector(state => state.city)
 
+    const fetchedPlaceInfo = useSelector(state => state.fetchedPlace)
+
     const dispatch = useDispatch()
 
 
     useEffect( () => {
             dispatch(setPlaces());
-            dispatch(fetchPlaces());
-            // console.log('apikey', process.env.REACT_APP_API_KEY)
-            // console.log('apiurl', process.env.REACT_APP_API_URL)
+            // dispatch(fetchPlace());
         }, []
     )
 
@@ -54,7 +55,8 @@ function App(store) {
                   </div>
 
                   <div className="col-9 main-content">
-                      <CityInfo city={cityInfo}/>
+                      {/*<CityInfo city={cityInfo}/>*/}
+                      <CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo}/>
                   </div>
               </div>
           </div>

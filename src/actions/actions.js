@@ -1,4 +1,4 @@
-import {FETCH_PLACES, SETCITY} from "../types/types";
+import {FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY} from "../types/types";
 import {SETPLACES} from "../types/types"
 
 
@@ -16,8 +16,22 @@ export function setPlaces(places) {
     }
 }
 
-export function fetchPlaces() {
+export function fetchPlacePending() {
     return {
-        type: FETCH_PLACES
+        type: FETCH_PLACE_PENDING
+    }
+}
+
+export function fetchPlaceSuccess(places) {
+    return {
+        type: FETCH_PLACE_SUCCESS,
+        payload: places
+    }
+}
+
+export function fetchPlaceError(error) {
+    return {
+        type: FETCH_PLACE_ERROR,
+        error: error
     }
 }
