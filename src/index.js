@@ -7,12 +7,14 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore, compose } from 'redux'
 import thunk from 'redux-thunk'
+import {composeWithDevTools} from "redux-devtools-extension";
 
 import {rootReducer} from './reducers/rootReducer'
 
 
-const devtoolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-const composed = compose(applyMiddleware(thunk), devtoolsEnhancer)
+// const devtoolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// const composed = compose(applyMiddleware(thunk), devtoolsEnhancer)
+const composed = composeWithDevTools(applyMiddleware(thunk))
 
 const preloadedState = {
     places: [],

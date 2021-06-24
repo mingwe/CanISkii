@@ -16,7 +16,7 @@ export const Sidebar = (props) => {
             <p className="h4">Select location:</p>
             <ul className="nav flex-column">
                 {places.map((item) =>
-                    <li className="nav-item" key={item.zip}>
+                    <li className="nav-item" key={item.id}>
                         <CityButton city={item}/>
                     </li>
                 )}

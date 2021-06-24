@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {setCity, setPlaces} from "../actions/actions";
+import React from "react";
+import {setCity} from "../actions/actions";
 import {useDispatch} from 'react-redux'
 import {fetchPlace} from "../fetch/fetchPlaces";
 

@@ -1,9 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 export const CityInfo = (props) => {
 
     const placeInfo = props.placeInfo
-    // const cityName = props.cityName
     const themeInfo = props.globalTheme
 
     if (Object.entries(placeInfo).length === 0) {

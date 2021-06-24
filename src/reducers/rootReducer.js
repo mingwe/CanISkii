@@ -1,4 +1,4 @@
-import {FETCH_PLACES, FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY, SETPLACES} from "../types/types"
+import {FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY, SETPLACES} from "../types/types"
 import {PLACES} from "../const/places"
 
 export const rootReducer = (state, action) => {

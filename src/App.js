@@ -1,10 +1,8 @@
 import './App.css';
 import React, {useEffect} from 'react'
-import {CityButton} from "./components/CityButton"
 import {CityInfo} from "./components/CityInfo"
 import {useDispatch} from "react-redux"
 import {setPlaces} from "./actions/actions"
-// import {fetchPlace} from "./fetch/fetchPlaces";
 import {useSelector} from "react-redux"
 import {Loader} from "./components/Loader";
 import {Sidebar} from "./components/Sidebar";
