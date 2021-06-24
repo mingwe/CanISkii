@@ -1,6 +1,20 @@
 import {FETCH_PLACES, FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY, SETPLACES} from "../types/types"
+import {PLACES} from "../const/places"
 
 export const rootReducer = (state, action) => {
+
+
+    function kelvinToCelsius(temp) {
+        if (typeof temp !== 'number')
+            return temp
+
+        let newTemp = (temp - 273.15)
+        let prefix = () => {
+            return (newTemp > 0) ? '+' : ''
+        }
+        newTemp = newTemp.toFixed(1)
+        return prefix()+newTemp
+    }
 
 
     switch (action.type) {
@@ -9,61 +23,82 @@ export const rootReducer = (state, action) => {
             return {...state, city: action.payload}
         case SETPLACES:
 
-            const PLACES = [
-                { name: "Kiev"},
-                { name: "Moscow"},
-                { name: "Bukovel", zip: "94303", temp: '22', wind: '2', date: '21.06.2021', rain: false },
-                { name: "Dragobrat", zip: "94088", temp: '19', wind: '4', date: '21.06.2021', rain: true  },
-                { name: "Slavskoe", zip: "95062", temp: '30', wind: '1', date: '21.06.2021', rain: false  }
-            ]
-
             return {...state, places: PLACES, isLoading: false}
 
-        // case FETCH_PLACES:
-        //
-        //
-        //     const testCity = 'kiev'
-        //
-        //     const url = `http://api.openweathermap.org/data/2.5/weather?q=${testCity}&appid=${process.env.REACT_APP_API_KEY}`
-        //     console.log(url)
-
-            // fetch(url)
-            //     .then((response) => {
-            //         // return response.json();
-            //         console.log('first then')
-            //         // console.log(response)
-            //         // console.log(response.json())
-            //         return {...state, fetchedplacesfrst: response.json()}
-            //     })
-            //     .then((data) => {
-            //         console.log('second then')
-            //         console.log(data);
-            //         return {...state, fetchedplaces: data}
-            //     });
-
-
-
-            // const PLACES = [
-            //     { name: "Bukovel", zip: "94303", temp: '22', wind: '2', date: '21.06.2021', rain: false },
-            //     { name: "Dragobrat", zip: "94088", temp: '19', wind: '4', date: '21.06.2021', rain: true  },
-            //     { name: "Slavskoe", zip: "95062", temp: '30', wind: '1', date: '21.06.2021', rain: false  }
-            // ]
-
-            // return {...state, places: PLACES, isLoading: false}
-            // return state
-
         case FETCH_PLACE_PENDING:
-            console.log('places pending:', action.payload)
-            return state
+            return {
+                ...state,
+                isLoading: true
+            }
 
         case FETCH_PLACE_SUCCESS:
 
-            console.log('places success:', action.payload)
-            return {...state, fetchedPlace: action.payload, hasError: false}
+            const data = action.payload
+
+            let isRain = false
+            let isCloud = false
+            let isGoodIdea = true
+            let bg
+
+
+            switch (data.weather[0].id) {
+                case 502:
+                    isRain = true
+                    isCloud = true
+                    isGoodIdea = false
+                    bg = 'bg-rain'
+                    break
+                case 800:
+                    isRain = false
+                    isCloud = false
+                    isGoodIdea = true
+                    bg = 'bg-sunny'
+                    break
+                case 801:
+                case 802:
+                case 803:
+                case 804:
+                    isRain = false
+                    isCloud = true
+                    isGoodIdea = false
+                    bg = 'bg-cloud'
+                    break
+                default:
+                    bg = 'bg-sunny'
+            }
+
+
+            const reducedPayload = {
+                id: data.id,
+                name: data.name,
+                temp: kelvinToCelsius(data.main.temp),
+                wind: data.wind,
+                weather: data.weather[0],
+                country: data.sys.country
+            }
+
+            return {
+                ...state,
+                isLoading: false,
+                // fetchedPlace: action.payload,
+                fetchedPlace: reducedPayload,
+                hasError: false,
+                globalTheme: {
+                    bg: bg,
+                    isInit: false,
+                    isRain: isRain,
+                    isCloud: isCloud,
+                    isGoodIdea: isGoodIdea
+                }
+            }
 
         case FETCH_PLACE_ERROR:
-            console.log('places error:', action.payload)
-            return {...state, hasError: true, errormessage: action.error}
+            return {
+                ...state,
+                isLoading: false,
+                hasError: true,
+                errormessage: action.error
+            }
 
         default:
             return state

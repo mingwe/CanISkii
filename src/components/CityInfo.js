@@ -1,28 +1,38 @@
 import React, {useEffect} from "react";
 
-import {setPlaces} from "../actions/actions";
-
-
 export const CityInfo = (props) => {
 
     const placeInfo = props.placeInfo
-    const cityName = props.cityName
+    // const cityName = props.cityName
+    const themeInfo = props.globalTheme
 
-    const tempString = JSON.stringify(placeInfo)
+    if (Object.entries(placeInfo).length === 0) {
+        return <div className="py-5">Select location</div>
+    }
+
+    let tempClass
+    let tempNumber = +placeInfo.temp
+    if (tempNumber > 31) {
+        tempClass = 'danger'
+    }
+    else if (tempNumber > 28) {
+        tempClass = 'warning'
+    } else {
+        tempClass = 'success'
+    }
+
+    console.log(themeInfo)
 
     return (
-        <div className="bg-default w-100">
-
-            <p>
-                {cityName}
+        <div className="w-100">
+            <h3>Weather in {placeInfo.name}, {placeInfo.country}</h3>
+            <p className={'description'}>{placeInfo.weather.main} / {placeInfo.weather.description}</p>
+            <p className="font-weight-bold">Outside temp is <span className={`display-4 ${tempClass}`}> <span className={`badge badge-${tempClass}`}>{placeInfo.temp}</span></span></p>
+            <p>Wind speed is {placeInfo.wind.speed} meters in second</p>
+            <hr/>
+            <p className="font-weight-bold">
+                If you wonna go to the beach, {themeInfo.isGoodIdea ? 'it\'s a good idea, the weather is cool!' : 'it\'s bad idea, weather isnt so good'}
             </p>
-            <pre>
-                {tempString}
-            </pre>
-            {/*<p>You choosed skiing location {place.name}</p>*/}
-            {/*<p>Outside temp is {place.temp}</p>*/}
-            {/*<p>The wind is {place.wind} m/s</p>*/}
-            {/*<p>{place.rain ? 'Its rainy now. You shell not pass' : 'There is no rain, maybe time to ski'}</p>*/}
         </div>
     )
 }

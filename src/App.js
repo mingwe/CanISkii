@@ -7,6 +7,8 @@ import {setPlaces} from "./actions/actions"
 // import {fetchPlace} from "./fetch/fetchPlaces";
 import {useSelector} from "react-redux"
 import {Loader} from "./components/Loader";
+import {Sidebar} from "./components/Sidebar";
+import {Copyright} from "./components/Copyright";
 
 // app dev CanISkii
 
@@ -23,6 +25,8 @@ function App(store) {
 
     const fetchedPlaceInfo = useSelector(state => state.fetchedPlace)
 
+    const globalThemeInfo = useSelector(state => state.globalTheme)
+
     const dispatch = useDispatch()
 
 
@@ -33,7 +37,7 @@ function App(store) {
     )
 
 
-    if (isLoading || !places) {
+    if (!places) {
         return (<div className="container text-center pt-5 mt-5">
             <Loader/>
         </div>)
@@ -41,23 +45,22 @@ function App(store) {
 
 
     return (
-        <div className="App">
-          <div className="container pt-5 mt-4">
+        <div
+            className={`App py-5 bg-app ${globalThemeInfo.bg}`}
+        >
+          <div className="container pt-5 bg-white-transp rounded-lg">
               <div className="row">
-                  <div className="sidebar sidebar-nav col-3">
-                      <ul className="nav flex-column">
-                          {places.map((item) =>
-                              <li className="nav-item" key={item.zip}>
-                                  <CityButton city={item}/>
-                              </li>
-                          )}
-                      </ul>
-                  </div>
+
+                  <Sidebar places={places}/>
 
                   <div className="col-9 main-content">
                       {/*<CityInfo city={cityInfo}/>*/}
-                      <CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo}/>
+                      {isLoading
+                          ? <Loader/>
+                          : <CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>
+                      }
                   </div>
+                  <Copyright/>
               </div>
           </div>
         </div>

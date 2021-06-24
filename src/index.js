@@ -18,7 +18,15 @@ const preloadedState = {
     places: [],
     fetchedPlace: {},
     city: {},
-    isLoading: true
+    isLoading: true,
+    hasError: false,
+    globalTheme: {
+        bg: 'bg-init',
+        isInit: true,
+        isRain: false,
+        isCloud: false,
+        isGoodIdea: false
+    }
 }
 
 

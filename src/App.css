@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.bg-app {
+  backgroud-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  transition: 0.3s;
+}
+.bg-init {
+  background-image: url('./assets/que.jpg');
+}
+.bg-sunny {
+  background-image: url('./assets/sun.jpg');
+}
+.bg-cloud {
+  background-image: url('./assets/clouds1.jpg');
+}
+.bg-rain {
+  background-image: url('./assets/rain.jpg');
+}
+.bg-white-transp {
+  background: rgba(255,255,255,0.8);
+}

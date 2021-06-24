@@ -11,7 +11,7 @@ export const CityButton = (props) => {
 
     const onclickHandler = (city) => {
         dispatch(setCity(city));
-        dispatch(fetchPlace(city.name))
+        dispatch(fetchPlace(city.id))
     }
 
     // const cityName = props.name ? props.name : 'default city'
