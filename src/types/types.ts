@@ -6,17 +6,34 @@ export const FETCH_PLACE_SUCCESS = 'FETCH_PLACE_SUCCESS'
 export const FETCH_PLACE_ERROR = 'FETCH_PLACE_ERROR'
 
 export interface IRootState {
-    isOn?: boolean
     places: any
     isLoading: boolean
+    hasError: boolean
     city: {
         name: string
     }
-    fetchedPlace: object
+    fetchedPlace: {
+        temp: string
+        name: string
+        country: string
+        weather: {
+            main: string
+            description: string
+        }
+        wind: {
+            speed: string
+        }
+    }
     globalTheme: {
         bg: string
         isInit: boolean
         isRain: boolean
         isCloud: boolean
+        isGoodIdea: boolean
     }
 }
+
+// export interface ICity {
+//     id: string
+//     name: string
+// }

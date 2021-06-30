@@ -5,7 +5,7 @@ export const fetchPlace = (place = 'kiev') => {
 
     const url = `http://api.openweathermap.org/data/2.5/weather?id=${place}&appid=${process.env.REACT_APP_API_KEY}`
 
-    return dispatch => {
+    return (dispatch: any) => {
         dispatch(fetchPlacePending());
 
         let isDemo = true

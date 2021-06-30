@@ -10,16 +10,30 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from "redux-devtools-extension";
 
 import {rootReducer} from './reducers/rootReducer'
+import {IRootState} from "./types/types";
 
 
 // const devtoolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 // const composed = compose(applyMiddleware(thunk), devtoolsEnhancer)
 const composed = composeWithDevTools(applyMiddleware(thunk))
 
-const preloadedState = {
+const preloadedState: IRootState = {
     places: [],
-    fetchedPlace: {},
-    city: {},
+    fetchedPlace: {
+        temp: "",
+        name: "",
+        country: '',
+        weather: {
+            main: '',
+            description: '',
+        },
+        wind: {
+            speed: '',
+        }
+    },
+    city: {
+        name: ''
+    },
     isLoading: true,
     hasError: false,
     globalTheme: {

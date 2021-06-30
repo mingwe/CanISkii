@@ -52,11 +52,15 @@ function App(store: any) {
                   <Sidebar places={places}/>
 
                   <div className="col-9 main-content">
-                      {/*<CityInfo city={cityInfo}/>*/}
+                      {globalThemeInfo.isInit
+                          ? <span>select city!!!!</span>
+                          : <span>city selected.</span>
+                      }
                       {isLoading
                           ? <Loader/>
                           : <CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>
                       }
+                      {/*<CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>*/}
                   </div>
                   <Copyright/>
               </div>

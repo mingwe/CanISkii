@@ -1,8 +1,16 @@
 import {CityButton} from "./CityButton";
-import React from "react";
+import React, {FC} from "react";
 
 
-export const Sidebar = (props) => {
+interface SidebarProps {
+    places: Array<{
+        id: string
+        name: string
+    }>
+}
+
+
+export const Sidebar: FC<SidebarProps> = (props) => {
 
     const places = props.places
 

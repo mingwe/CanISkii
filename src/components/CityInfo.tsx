@@ -1,6 +1,50 @@
-import React from "react";
+import React, {FC} from "react";
 
-export const CityInfo = (props) => {
+
+interface CityInfoProps {
+    // props: {
+    //     placeInfo: {
+    //         temp?: string
+    //         name?: string
+    //         country?: string
+    //         weather?: {
+    //             main: string
+    //             description: string
+    //         }
+    //         wind?: {
+    //             speed: string
+    //         }
+    //     }
+    //     globalTheme: {
+    //         isGoodIdea: boolean
+    //         isRain: boolean
+    //         isCloud: boolean
+    //         isInit: boolean
+    //     }
+    // }
+    // props: string
+    cityName: string
+    placeInfo: {
+        temp: string
+        name: string
+        country: string
+        weather: {
+            main: string
+            description: string
+        }
+        wind: {
+            speed: string
+        }
+    }
+    globalTheme: {
+        isGoodIdea: boolean
+        isRain: boolean
+        isCloud: boolean
+        isInit: boolean
+    }
+}
+
+export const CityInfo: FC<CityInfoProps> = (props) => {
 
     const placeInfo = props.placeInfo
     const themeInfo = props.globalTheme
@@ -21,6 +65,12 @@ export const CityInfo = (props) => {
     }
 
     console.log(themeInfo)
+
+    if (themeInfo.isInit) {
+        return (<div>
+            select city
+        </div>)
+    }
 
     return (
         <div className="w-100">
