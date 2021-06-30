@@ -21,7 +21,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
         )
 
     return (
-        <div className="sidebar sidebar-nav col-3 bg-gray">
+        <div className="sidebar sidebar-nav bg-gray">
             <p className="h4">Select location:</p>
             <ul className="nav flex-column">
                 {places.map((item) =>

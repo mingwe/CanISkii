@@ -1,28 +1,31 @@
 import './App.css';
 import React, {useEffect} from 'react'
-import {CityInfo} from "./components/CityInfo"
+import {BrowserRouter as Router, Route} from "react-router-dom"
+
 import {useDispatch} from "react-redux"
 import {setPlaces} from "./actions/actions"
 import {useSelector} from "react-redux"
 import {Loader} from "./components/Loader";
-import {Sidebar} from "./components/Sidebar";
-import {Copyright} from "./components/Copyright";
 
 import {IRootState} from "./types/types";
+import {Main} from "./components/Main";
+import {About} from "./components/About";
+import {Navbar} from "./components/Navbar";
 
 // app dev CanISkii
+
 
 function App(store: any) {
 
   // const [places, setPlaces] = useEffect([], [])
 
     const places = useSelector((state: IRootState) => state.places)
-    const isLoading = useSelector((state: IRootState) => state.isLoading)
-    const cityInfo = useSelector((state: IRootState) => state.city)
-    const fetchedPlaceInfo = useSelector((state: IRootState) => state.fetchedPlace)
+
     const globalThemeInfo = useSelector((state: IRootState) => state.globalTheme)
 
     const dispatch = useDispatch()
+
+    const relpath = process.env.REACT_APP_SUBFOLDER_PATH
 
 
     useEffect( () => {
@@ -40,24 +43,25 @@ function App(store: any) {
 
 
     return (
-        <div
-            className={`App py-5 bg-app ${globalThemeInfo.bg}`}
-        >
-          <div className="container pt-5 bg-white-transp rounded-lg">
-              <div className="row">
+        <div className={`App py-5 bg-app ${globalThemeInfo.bg}`}>
+            <Router>
+                <div className="container pt-2 pb-5 bg-white-transp rounded-lg">
 
-                  <Sidebar places={places}/>
+                        <Navbar relpath={relpath} />
 
-                  <div className="col-9 main-content">
-                      {isLoading
-                          ? <Loader/>
-                          : <CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>
-                      }
-                  </div>
+                        <Route path={relpath + "/"} exact>
+                            <Main
+                                globalThemeInfo={globalThemeInfo}
+                                places={places}
+                            />
+                        </Route>
 
-                  <Copyright/>
-              </div>
-          </div>
+                        <Route path={relpath + "/about"} exact>
+                            <About/>
+                        </Route>
+
+                </div>
+            </Router>
         </div>
     )
 }
