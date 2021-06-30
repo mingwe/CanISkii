@@ -14,9 +14,6 @@ import {IRootState} from "./types/types";
 
 function App(store: any) {
 
-    // TS infers `isOn` is boolean
-    // const isOn = useSelector(selectIsOn)
-
   // const [places, setPlaces] = useEffect([], [])
 
     const places = useSelector((state: IRootState) => state.places)
@@ -30,8 +27,8 @@ function App(store: any) {
 
     useEffect( () => {
             dispatch(setPlaces());
-            // dispatch(fetchPlace());
-        }, []
+            console.log('effect')
+        }, [dispatch]
     )
 
 
@@ -52,16 +49,12 @@ function App(store: any) {
                   <Sidebar places={places}/>
 
                   <div className="col-9 main-content">
-                      {globalThemeInfo.isInit
-                          ? <span>select city!!!!</span>
-                          : <span>city selected.</span>
-                      }
                       {isLoading
                           ? <Loader/>
                           : <CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>
                       }
-                      {/*<CityInfo cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>*/}
                   </div>
+
                   <Copyright/>
               </div>
           </div>

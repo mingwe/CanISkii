@@ -1,5 +1,6 @@
 import {CityButton} from "./CityButton";
 import React, {FC} from "react";
+import {Loader} from "./Loader";
 
 
 interface SidebarProps {
@@ -16,7 +17,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
 
     if (!places)
         return (
-            <div>loading...</div>
+            <Loader/>
         )
 
     return (

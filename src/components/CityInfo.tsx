@@ -1,28 +1,6 @@
 import React, {FC} from "react";
 
-
 interface CityInfoProps {
-    // props: {
-    //     placeInfo: {
-    //         temp?: string
-    //         name?: string
-    //         country?: string
-    //         weather?: {
-    //             main: string
-    //             description: string
-    //         }
-    //         wind?: {
-    //             speed: string
-    //         }
-    //     }
-    //     globalTheme: {
-    //         isGoodIdea: boolean
-    //         isRain: boolean
-    //         isCloud: boolean
-    //         isInit: boolean
-    //     }
-    // }
-    // props: string
     cityName: string
     placeInfo: {
         temp: string
@@ -49,10 +27,6 @@ export const CityInfo: FC<CityInfoProps> = (props) => {
     const placeInfo = props.placeInfo
     const themeInfo = props.globalTheme
 
-    if (Object.entries(placeInfo).length === 0) {
-        return <div className="py-5">Select location</div>
-    }
-
     let tempClass
     let tempNumber = +placeInfo.temp
     if (tempNumber > 31) {
@@ -63,8 +37,6 @@ export const CityInfo: FC<CityInfoProps> = (props) => {
     } else {
         tempClass = 'success'
     }
-
-    console.log(themeInfo)
 
     if (themeInfo.isInit) {
         return (<div>

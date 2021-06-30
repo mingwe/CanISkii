@@ -5,12 +5,6 @@ import {fetchPlace} from "../fetch/fetchPlaces";
 // import {ICity} from "../types/types";
 
 interface CityButtonProps {
-    // props: {
-    //     city: {
-    //         id: string
-    //         name: string
-    //     }
-    // }
     city: {
         id: string
         name: string
@@ -25,9 +19,6 @@ export const CityButton: FC<CityButtonProps> = (props) => {
         dispatch(setCity(city));
         dispatch(fetchPlace(city.id))
     }
-
-    // const cityName = props.name ? props.name : 'default city'
-
 
     const city = props.city
 

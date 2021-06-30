@@ -33,6 +33,14 @@ export interface IRootState {
     }
 }
 
+
+// export interface IPlaces {
+//     places: Array<{
+//         id: string
+//         name: string
+//     }>
+// }
+
 // export interface ICity {
 //     id: string
 //     name: string
