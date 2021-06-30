@@ -1,19 +1,26 @@
 import {FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY, SETPLACES} from "../types/types"
 import {PLACES} from "../const/places"
 
-export const rootReducer = (state, action) => {
+interface IAction {
+    type: string
+    payload?: any
+    error?: string
+}
+
+export const rootReducer = (state: any, action: IAction) => {
 
 
-    function kelvinToCelsius(temp) {
-        if (typeof temp !== 'number')
-            return temp
+    function kelvinToCelsius(temp: number) {
+        // if (typeof temp !== 'number')
+        //     return temp
 
-        let newTemp = (temp - 273.15)
+        let newTemp: number = (temp - 273.15)
+        let newTempString: string
         let prefix = () => {
             return (newTemp > 0) ? '+' : ''
         }
-        newTemp = newTemp.toFixed(1)
-        return prefix()+newTemp
+        newTempString = newTemp.toFixed(1)
+        return prefix()+newTempString
     }
 
 
@@ -35,10 +42,10 @@ export const rootReducer = (state, action) => {
 
             const data = action.payload
 
-            let isRain = false
-            let isCloud = false
-            let isGoodIdea = true
-            let bg
+            let isRain: boolean = false
+            let isCloud: boolean = false
+            let isGoodIdea: boolean = true
+            let bg: string
 
 
             switch (data.weather[0].id) {

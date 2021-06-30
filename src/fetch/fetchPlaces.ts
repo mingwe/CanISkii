@@ -1,14 +1,14 @@
 import {fetchPlacePending, fetchPlaceError, fetchPlaceSuccess} from "../actions/actions";
 
 // function fetchPlaces() {
-export const fetchPlace = (place = 'kiev') => {
+export const fetchPlace = (place: string) => {
 
-    const url = `http://api.openweathermap.org/data/2.5/weather?id=${place}&appid=${process.env.REACT_APP_API_KEY}`
+    const url: string = `http://api.openweathermap.org/data/2.5/weather?id=${place}&appid=${process.env.REACT_APP_API_KEY}`
 
-    return dispatch => {
+    return (dispatch: any) => {
         dispatch(fetchPlacePending());
 
-        let isDemo = true
+        let isDemo: boolean = true
         isDemo = false
 
         if (isDemo) {

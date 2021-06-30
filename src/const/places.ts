@@ -44,7 +44,4 @@ export const PLACES = [
     //     id: ,
     //     name: '',
     // },
-    //
-    // { name: "Dragobrat"},
-    // { name: "Slavskoe"}
 ]

@@ -1,21 +1,24 @@
-import React from "react";
+import React, {FC} from "react";
 import {setCity} from "../actions/actions";
 import {useDispatch} from 'react-redux'
 import {fetchPlace} from "../fetch/fetchPlaces";
+// import {ICity} from "../types/types";
 
-export const CityButton = (props) => {
+interface CityButtonProps {
+    city: {
+        id: string
+        name: string
+    }
+}
 
-
+export const CityButton: FC<CityButtonProps> = (props) => {
 
     const dispatch = useDispatch()
 
-    const onclickHandler = (city) => {
+    const onclickHandler = (city: CityButtonProps['city']) => {
         dispatch(setCity(city));
         dispatch(fetchPlace(city.id))
     }
-
-    // const cityName = props.name ? props.name : 'default city'
-
 
     const city = props.city
 
