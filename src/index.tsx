@@ -40,6 +40,11 @@ const preloadedState: IRootState = {
         isRain: false,
         isCloud: false,
         isGoodIdea: false
+    },
+    alert: {
+        isVisible: false,
+        text: '',
+        type: '',
     }
 }
 

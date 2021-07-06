@@ -30,7 +30,6 @@ function App(store: any) {
 
     useEffect( () => {
             dispatch(setPlaces());
-            console.log('effect')
         }, [dispatch]
     )
 

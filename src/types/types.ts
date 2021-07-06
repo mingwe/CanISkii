@@ -3,6 +3,8 @@ export const SETPLACES = 'SETPLACES'
 export const FETCH_PLACE_PENDING = 'FETCH_PLACE_PENDING'
 export const FETCH_PLACE_SUCCESS = 'FETCH_PLACE_SUCCESS'
 export const FETCH_PLACE_ERROR = 'FETCH_PLACE_ERROR'
+export const SHOW_ALERT = 'SHOW_ALERT'
+export const HIDE_ALERT = 'HIDE_ALERT'
 
 export interface IRootState {
     places: any
@@ -29,6 +31,11 @@ export interface IRootState {
         isRain: boolean
         isCloud: boolean
         isGoodIdea: boolean
+    }
+    alert: {
+        isVisible: boolean
+        text: string
+        type: string
     }
 }
 

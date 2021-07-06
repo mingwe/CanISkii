@@ -1,4 +1,11 @@
-import {FETCH_PLACE_PENDING, FETCH_PLACE_ERROR, FETCH_PLACE_SUCCESS, SETCITY, SETPLACES} from "../types/types"
+import {
+    FETCH_PLACE_PENDING,
+    FETCH_PLACE_ERROR,
+    FETCH_PLACE_SUCCESS,
+    SETCITY,
+    SETPLACES,
+    SHOW_ALERT, HIDE_ALERT
+} from "../types/types"
 import {PLACES} from "../const/places"
 
 interface IAction {
@@ -105,6 +112,32 @@ export const rootReducer = (state: any, action: IAction) => {
                 isLoading: false,
                 hasError: true,
                 errormessage: action.error
+            }
+
+        case SHOW_ALERT:
+            // return {
+            //     ...state,
+            //     alert: {
+            //         isVisible: true,
+            //         text: action.payload
+            //     }
+            // }
+
+            return {
+                ...state,
+                alert: {
+                    isVisible: true,
+                    text: action.payload.text,
+                    type: action.payload.type
+                }
+            }
+
+        case HIDE_ALERT:
+            return {
+                ...state,
+                alert: {
+                    isVisible: false
+                }
             }
 
         default:

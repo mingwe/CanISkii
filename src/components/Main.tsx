@@ -4,6 +4,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {IRootState} from "../types/types";
 import {Sidebar} from "./Sidebar";
+import {Alert} from "./Alert";
 
 
 export const Main = (props: any) => {
@@ -15,7 +16,7 @@ export const Main = (props: any) => {
     const cityInfo = useSelector((state: IRootState) => state.city)
     const fetchedPlaceInfo = useSelector((state: IRootState) => state.fetchedPlace)
 
-
+    const alertInfo = useSelector((state: IRootState) => state.alert )
 
 
     return (
@@ -26,6 +27,12 @@ export const Main = (props: any) => {
                 <Sidebar places={places}/>
             </div>
             <div className="col-9 main-content pt-2 mt-1">
+
+                {alertInfo.isVisible
+                    ? <Alert alertType={alertInfo.type} alertText={alertInfo.text}/>
+                    : ''
+                }
+
                 {isLoading
                     ? <Loader/>
                     : <CityInfo hasError={hasError} cityName={cityInfo.name} placeInfo={fetchedPlaceInfo} globalTheme={globalThemeInfo}/>
