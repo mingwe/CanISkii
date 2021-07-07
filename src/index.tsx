@@ -37,8 +37,6 @@ const preloadedState: IRootState = {
     globalTheme: {
         bg: 'bg-init',
         isInit: true,
-        isRain: false,
-        isCloud: false,
         isGoodIdea: false
     },
     alert: {

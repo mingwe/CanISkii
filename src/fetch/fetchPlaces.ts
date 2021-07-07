@@ -1,6 +1,5 @@
 import {fetchPlacePending, fetchPlaceError, fetchPlaceSuccess} from "../actions/actions";
 
-// function fetchPlaces() {
 export const fetchPlace = (place: string) => {
 
     const url: string = `http://api.openweathermap.org/data/2.5/weather?id=${place}&appid=${process.env.REACT_APP_API_KEY}`
@@ -35,5 +34,3 @@ export const fetchPlace = (place: string) => {
             })
     }
 }
-
-// export fetchPlaces

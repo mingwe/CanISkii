@@ -1,9 +1,6 @@
-import React, {FC, useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {hideAlert, showAlert} from "../actions/actions";
+import React, {FC} from "react";
 
 interface CityInfoProps {
-    cityName: string
     placeInfo: {
         temp: string
         name: string
@@ -18,8 +15,6 @@ interface CityInfoProps {
     }
     globalTheme: {
         isGoodIdea: boolean
-        isRain: boolean
-        isCloud: boolean
         isInit: boolean
     }
     hasError?: boolean
@@ -29,10 +24,6 @@ export const CityInfo: FC<CityInfoProps> = (props) => {
 
     const placeInfo = props.placeInfo
     const themeInfo = props.globalTheme
-    const hasError = props.hasError || false
-    const isInit = themeInfo.isInit
-
-    const dispatch = useDispatch()
 
     let tempClass
     let tempNumber = +placeInfo.temp
@@ -44,24 +35,6 @@ export const CityInfo: FC<CityInfoProps> = (props) => {
     } else {
         tempClass = 'success'
     }
-
-    useEffect( () => {
-
-            if (hasError) {
-                dispatch(showAlert('Something went wrong. Maybe its too much requests for open api...', 'danger'))
-            }
-            else if (isInit) {
-                dispatch(showAlert('No location selected. Choose it from sidebar'))
-            }
-            else {
-                dispatch(hideAlert())
-            }
-
-        }, [dispatch, hasError, isInit]
-    )
-
-    if (hasError || isInit)
-        return <></>
 
     return (
         <div className="mx-3 mt-4 bg-white py-4 rounded-lg">

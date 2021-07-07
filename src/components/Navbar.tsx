@@ -9,7 +9,6 @@ export const Navbar: FC<NavbarProps> = (props) => {
 
 
     const relpath = props.relpath
-    console.log('relpath', relpath)
 
     return (
         <nav className="mb-5 mt-3 navbar navbar-expand-lg navbar-light rounded-lg">

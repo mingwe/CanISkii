@@ -49,22 +49,16 @@ export const rootReducer = (state: any, action: IAction) => {
 
             const data = action.payload
 
-            let isRain: boolean = false
-            let isCloud: boolean = false
             let isGoodIdea: boolean = true
             let bg: string
 
 
             switch (data.weather[0].id) {
                 case 502:
-                    isRain = true
-                    isCloud = true
                     isGoodIdea = false
                     bg = 'bg-rain'
                     break
                 case 800:
-                    isRain = false
-                    isCloud = false
                     isGoodIdea = true
                     bg = 'bg-sunny'
                     break
@@ -72,8 +66,6 @@ export const rootReducer = (state: any, action: IAction) => {
                 case 802:
                 case 803:
                 case 804:
-                    isRain = false
-                    isCloud = true
                     isGoodIdea = false
                     bg = 'bg-cloud'
                     break
@@ -100,8 +92,6 @@ export const rootReducer = (state: any, action: IAction) => {
                 globalTheme: {
                     bg: bg,
                     isInit: false,
-                    isRain: isRain,
-                    isCloud: isCloud,
                     isGoodIdea: isGoodIdea
                 }
             }
@@ -115,14 +105,6 @@ export const rootReducer = (state: any, action: IAction) => {
             }
 
         case SHOW_ALERT:
-            // return {
-            //     ...state,
-            //     alert: {
-            //         isVisible: true,
-            //         text: action.payload
-            //     }
-            // }
-
             return {
                 ...state,
                 alert: {
@@ -142,7 +124,6 @@ export const rootReducer = (state: any, action: IAction) => {
 
         default:
             return state
-        // state
     }
 
 }

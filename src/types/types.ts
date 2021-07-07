@@ -28,8 +28,6 @@ export interface IRootState {
     globalTheme: {
         bg: string
         isInit: boolean
-        isRain: boolean
-        isCloud: boolean
         isGoodIdea: boolean
     }
     alert: {
